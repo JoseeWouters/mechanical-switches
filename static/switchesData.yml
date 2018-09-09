@@ -1,0 +1,13 @@
+switches:
+  - name: Cherry MX Red
+    type: linear
+    force: 45
+    point: 2
+  - name: Cherry MX Brown
+    type: tactile
+    force: 45
+    point: 2
+  - name: Cherry MX Blue
+    type: clicky
+    force: 60
+    point: 2

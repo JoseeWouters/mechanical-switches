@@ -1,23 +1,30 @@
 <template>
-    <section>
-        <ul>
-            <li v-for="item in filteredSwitches" v-bind:key="item.id">
-                {{item.name}}
-            </li>
-        </ul>
-        <h1>Type switch</h1>
-        <label for="linear">
-            Linear
-            <input type="checkbox" id="linear" v-model="filterOptions" value="linear">
-        </label>
-        <label for="clicky">
-            Clicky
-            <input type="checkbox" id="clicky" v-model="filterOptions" value="clicky">
-        </label>
-        <label for="tactile">
-            Tactile
-            <input type="checkbox" id="tactile" v-model="filterOptions" value="tactile">
-        </label>
+    <section class="container">
+        <div class="grid">
+            <div class="grid__header">
+                <div>Switch</div>
+                <div>Type</div>
+                <div>Actuation force</div>
+                <div>Actuation point</div>
+            </div>
+            <div class="grid__row" v-for="item in $store.state.switchesData.switches" v-bind:key="item.id">
+                <div>{{item.name}}</div> 
+                <div>{{item.type}}</div>
+                <div>{{item.force}} g</div>
+                <div>{{item.point}} mm</div>
+            </div>
+        </div>
+
+        <div v-for="filter in $store.state.filterOptions.filters" v-bind:key="filter.id">
+            <h2>{{filter.name}}</h2>
+            <fieldset v-for="option in filter.options" v-bind:key="option.id">
+                <label :for="option.value">
+                    <input type="checkbox" :id="option.value" v-model="myFilters" :value="option.value">
+                    {{option.name}}
+                </label>
+            </fieldset>
+        </div>
+
     </section>
 </template>
 
@@ -26,39 +33,55 @@
 export default {
     data: () => {
         return {
-            filterOptions: [],
-            switches: [
-                {
-                    name: 'Cherry MX Red',
-                    type: 'linear',
-                    force: 45,
-                    point: 2,
-                },
-                {
-                    name: 'Cherry MX Brown',
-                    type: 'tactile',
-                    force: 45,
-                    point: 2,
-                },
-                {
-                    name: 'Cherry MX Blue',
-                    type: 'clicky',
-                    force: 60,
-                    point: 2,
-                }
-            ]
+            myFilters: [],
+                    
         }
     },
-    computed: {
-        filteredSwitches() {
-            if (!this.filterOptions.length) {
-		  		return this.switches;
-	  		} else {
-				return this.switches.filter(item => {
-		  			return this.filterOptions.includes(item.type);
-				});
-	  		} // else
+    head () {
+        return {
+            link: [
+                { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto' }
+            ]
+        } 
+    }
+}
+
+</script>
+
+<style lang="scss">
+body {
+    font-family: 'Roboto';
+}
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+fieldset {
+    display: inline-block;
+    border: 0;
+}
+.grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border: 1px solid #ECECEB;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    * {
+        padding: 1em;
+    }
+    &__header {
+        display: contents;
+        * {
+            background: #A071D0;
+            color: #ffffff;
+        }
+    }
+    &__row {
+        display: contents;
+        &:nth-child(odd) * {
+            background: #ECECEB;
         }
     }
 }
-</script>
+</style>
+

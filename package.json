@@ -5,6 +5,11 @@
         "generate": "nuxt generate"
     },
     "dependencies": {
+        "js-yaml-loader": "^0.1.0",
         "nuxt": "^1.4.2"
+    },
+    "devDependencies": {
+        "node-sass": "^4.9.3",
+        "sass-loader": "^7.1.0"
     }
 }

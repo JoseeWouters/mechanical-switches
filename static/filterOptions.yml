@@ -1,0 +1,19 @@
+filters:
+  - name: Switch type
+    options:
+      - name: Linear
+        value: linear
+      - name: Tactile
+        value: tactile
+      - name: Clicky
+        value: clicky
+  - name: Actuation force
+    options:
+      - name: 45
+        value: 45
+      - name: 60
+        value: 60
+  - name: Actuation point
+    options: 
+      - name: 2
+        value: 2
